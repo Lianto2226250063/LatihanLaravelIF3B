@@ -13,7 +13,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="nama">Nama Prodi</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama Prodi">
+                        <input type="text" class="form-control" name="nama" placeholder="Nama Prodi" value="{{ old('nama') }}">
                         @error('nama')
                             <label class="text-danger">{{ $message }}</label>
                         @enderror
@@ -29,7 +29,7 @@
                         @enderror
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <a href="{{ url('fakultas')}}" class="btn btn-light">Cancel</a>
+                    <a href="{{ url('prodi')}}" class="btn btn-light">Cancel</a>
                 </form>
             </div>
         </div>
