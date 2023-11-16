@@ -8,8 +8,8 @@
     <div class="col-lg-12 grid-margin strech-card">
         <div class="card">
             <div class="card-body">
-        <h4 class="card-title">Program Studi</h4>
-        <p class="card-description">Daftar Program Studi Di MDP</p>
+        <h4 class="card-title">Mahasiswa</h4>
+        <p class="card-description">Daftar Mahasiswa Di MDP</p>
         <a href="{{route('mahasiswa.create')}}" class="btn btn-outline-primary btn-rounded btn-icon"><i class="mdi mdi-account-plus"></i></a>
             <div class="table-responsive">
                 <table class="table table-dark">
@@ -21,6 +21,7 @@
                 <th>foto</th>
                 <th>Nama Prodi</th>
                 <th>Nama Fakultas</th>
+                <th>Aksi</th>
                 </tr>
                 @foreach ($mahasiswa as $item)
                 <tr>
@@ -31,6 +32,18 @@
                 <td><img src="images/{{$item['foto']}}" class="rounded-circle" width="70px" /></td>
                 <td>{{$item['prodi']['nama']}}</td>
                 <td>{{$item['prodi']['fakultas']['nama']}}</td>
+                <td>
+                    <div class="d-flex">
+                        <a href="{{ route('mahasiswa.edit', $item->id) }}">
+                            <button class="btn btn-success btn-rounded btn-sm mx-3">Edit</button>
+                        </a>
+                        <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-rounded btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </td>
                 </tr>
                 @endforeach
                 </table>
@@ -39,4 +52,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script>
+        @if (Session::get('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+    </script>
 @endsection
