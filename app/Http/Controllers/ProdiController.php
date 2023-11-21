@@ -52,15 +52,21 @@ class ProdiController extends Controller
      */
     public function edit(prodi $prodi)
     {
-        //
+        $fakultas = fakultas::all();
+        return view("prodi.edit")->with("prodi",$prodi)->with("fakultas", $fakultas);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, prodi $prodi)
+    public function update(Request $request, $id)
     {
-        //
+        $validasi = $request->validate([
+            "nama" => "required",
+            "fakultas_id" => "required"
+        ]);
+        prodi::find($id)->update($validasi);
+        return redirect('prodi')->with('success','Data prodi berhasil diubah');
     }
 
     /**
@@ -68,6 +74,7 @@ class ProdiController extends Controller
      */
     public function destroy(prodi $prodi)
     {
-        //
+        $prodi->delete();
+        return redirect()->route("prodi.index")->with("success","Data berhasil dihapus");
     }
 }

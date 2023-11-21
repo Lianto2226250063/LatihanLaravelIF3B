@@ -18,6 +18,18 @@
                         @foreach ($fakultas as $item)
                         <tr>
                             <td>{{$item['nama']}}</td>
+                            <td>
+                                <div class="d-flex">
+                                <a href="{{ route('fakultas.edit', $item->id) }}">
+                                    <button class="btn btn-success btn-rounded btn-sm mx-3">Edit</button>
+                                </a>
+                                <form method="POST" action="{{ route('fakultas.destroy', $item->id) }}">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-rounded btn-sm show_confirm" data-toggle="tooltip" title="Delete" data-nama='{{ $item->nama }}'>Delete</button>
+                                </form>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                     </table>
@@ -26,4 +38,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script>
+        @if (Session::get('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+    </script>
 @endsection
