@@ -66,9 +66,23 @@ class MahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(Request $request, $id)
     {
-        //
+        $validasi = $request->validate([
+            "npm" => "required",
+            "nama" => "required",
+            "tempat_lahir" => "required",
+            "tanggal_lahir"=> "required",
+            "foto"=> "image|nullable",
+            "prodi_id" => "required"
+        ]);
+        if($request['foto'] != null){
+            $ext = $request->foto->getClientOriginalExtension();
+            $validasi["foto"] = $request->npm.".".$ext;
+            $request->foto->move(public_path('images'), $validasi["foto"]);
+        }
+        Mahasiswa::find($id)->update($validasi);
+        return redirect('mahasiswa')->with('success','Data mahasiswa berhasil diubah');
     }
 
     /**

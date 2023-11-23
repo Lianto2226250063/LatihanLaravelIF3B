@@ -64,7 +64,7 @@ class FakultasController extends Controller
     public function update(Request $request, $id)
     {
         $validasi = $request->validate([
-            "nama" => "required"
+            "nama" => "required|unique:fakultas"
         ]);
         Fakultas::find($id)->update($validasi);
         return redirect('fakultas')->with('success','Data fakultas berhasil diubah');
