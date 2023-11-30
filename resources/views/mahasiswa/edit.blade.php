@@ -37,6 +37,15 @@
                             <label class="text-danger">{{ $message }}</label>
                         @enderror
 
+                        <label for="jk">Jenis Kelamin</label>
+                        <select name="jk" class="form-control">
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                        @error('jk')
+                            <label class="text-danger">{{ $message }}</label>
+                        @enderror
+
                         <label for="foto">Foto</label>
                         <input type="file" class="form-control" name="foto" placeholder="Foto" value=" {{ $mahasiswa['foto'] }}">
                         @error('foto')
