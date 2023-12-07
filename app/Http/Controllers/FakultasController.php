@@ -10,6 +10,11 @@ class FakultasController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this -> middleware('checkRole:A')->except('index');
+    }
+
     public function index()
     {
         $fakultas = Fakultas::all();

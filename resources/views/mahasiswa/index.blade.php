@@ -10,7 +10,9 @@
             <div class="card-body">
         <h4 class="card-title">Mahasiswa</h4>
         <p class="card-description">Daftar Mahasiswa Di MDP</p>
+        @can('create', Mahasiswa::class)
         <a href="{{route('mahasiswa.create')}}" class="btn btn-outline-primary btn-rounded btn-icon"><i class="mdi mdi-account-plus"></i></a>
+        @endcan
             <div class="table-responsive">
                 <table class="table table-dark">
                 <tr>
@@ -22,7 +24,9 @@
                 <th>foto</th>
                 <th>Nama Prodi</th>
                 <th>Nama Fakultas</th>
-                <th>Aksi</th>
+                @can('create', Mahasiswa::class)
+                    <th>Aksi</th>
+                @endcan
                 </tr>
                 @foreach ($mahasiswa as $item)
                 <tr>
@@ -36,14 +40,18 @@
                 <td>{{$item['prodi']['fakultas']['nama']}}</td>
                 <td>
                     <div class="d-flex">
+                        @can('update', $item)
                         <a href="{{ route('mahasiswa.edit', $item->id) }}">
                             <button class="btn btn-success btn-rounded btn-sm mx-3">Edit</button>
                         </a>
+                        @endcan
+                        @can('delete', $item)
                         <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-rounded btn-sm show_confirm" data-toggle="tooltip" title="Delete" data-nama='{{ $item->nama }}'>Delete</button>
                         </form>
+                        @endcan
                     </div>
                 </td>
                 </tr>

@@ -31,6 +31,7 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Prodi::class);
         $validasi = $request->validate([
             "nama"=> "required|unique:prodis",
             "fakultas_id" => "required"
@@ -52,6 +53,7 @@ class ProdiController extends Controller
      */
     public function edit(prodi $prodi)
     {
+        $this->authorize('update', Prodi::class);
         $fakultas = fakultas::all();
         return view("prodi.edit")->with("prodi",$prodi)->with("fakultas", $fakultas);
     }
@@ -61,6 +63,7 @@ class ProdiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Prodi::class);
         $validasi = $request->validate([
             "nama" => "required",
             "fakultas_id" => "required"
@@ -74,6 +77,7 @@ class ProdiController extends Controller
      */
     public function destroy(prodi $prodi)
     {
+        $this->authorize('delete', $prodi);
         $prodi->delete();
         return redirect()->route("prodi.index")->with("success","Data berhasil dihapus");
     }

@@ -25,16 +25,16 @@ Route::get('/', function () {
 // });
 
 //Admin
-Route::middleware(['auth','checkRole:A'])->group(function(){
+Route::middleware(['auth'])->group(function(){
     Route::resource('fakultas',FakultasController::class);
     Route::resource('prodi',ProdiController::class);
     Route::resource('mahasiswa',MahasiswaController::class);
 });
 
 //User
-Route::middleware(['auth','checkRole:U,A'])->group(function(){
-    Route::get('/fakultas', [FakultasController::class, 'index'])->name('fakultas.index');
-});
+// Route::middleware(['auth','checkRole:U,A'])->group(function(){
+//     Route::get('/fakultas', [FakultasController::class, 'index'])->name('fakultas.index');
+// });
 
 // Route::get('/prodi', function(){
 //     return view('prodi');
