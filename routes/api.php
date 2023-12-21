@@ -31,13 +31,19 @@ Route::middleware(['auth:sanctum', 'ability:create-fakultas'])->post('fakultas',
 Route::middleware(['auth:sanctum', 'ability:update-fakultas'])->patch('fakultas/{id}', [FakultasController::class, 'update']);
 Route::middleware(['auth:sanctum', 'ability:delete-fakultas'])->delete('fakultas/{id}', [FakultasController::class, 'destroy']);
 
-Route::get('prodi',[ProdiController::class,'index']);
-Route::get('mahasiswa',[MahasiswaController::class,'index']);
+// Route::middleware('auth:sanctum')->get('prodi',[ProdiController::class, 'index']);
+// Route::middleware(['auth:sanctum', 'ability:read-prodi'])->get('prodi', [ProdiController::class, 'index']);
+// Route::middleware(['auth:sanctum', 'ability:create-prodi'])->post('prodi', [ProdiController::class, 'store']);
+// Route::middleware(['auth:sanctum', 'ability:update-prodi'])->patch('prodi/{id}', [ProdiController::class, 'update']);
+// Route::middleware(['auth:sanctum', 'ability:delete-prodi'])->delete('prodi/{id}', [ProdiController::class, 'destroy']);
 
-Route::post('fakultas', [FakultasController::class, 'store']);
-Route::post('prodi', [ProdiController::class, 'store']);
-Route::post('mahasiswa', [MahasiswaController::class, 'store']);
+// Route::get('prodi',[ProdiController::class,'index']);
+// Route::get('mahasiswa',[MahasiswaController::class,'index']);
 
-Route::patch('fakultas/{id}', [FakultasController::class, 'update']);
+// Route::post('fakultas', [FakultasController::class, 'store']);
+// Route::post('prodi', [ProdiController::class, 'store']);
+// Route::post('mahasiswa', [MahasiswaController::class, 'store']);
 
-Route::delete('fakultas/{id}', [FakultasController::class, 'destroy']);
+// Route::patch('fakultas/{id}', [FakultasController::class, 'update']);
+
+// Route::delete('fakultas/{id}', [FakultasController::class, 'destroy']);
